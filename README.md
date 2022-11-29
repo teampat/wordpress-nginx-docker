@@ -115,13 +115,17 @@ Once configured the containers can be brought up using Docker Compose
 
 ## Deploy with your old WordPress website 
 1. Copy your wordpress files into `./wordpress` before start Docker Compose.
-2. Copy env from template file (`.env.develop` or `.env.production`) to `.env`
+2. Change file owner to www-data
+   ```console
+   chown -R www-data:www-data wordpress/
+   ```
+3. Copy env from template file (`.env.develop` or `.env.production`) to `.env`
 
    ```console
    cp .env.develop .env
    ```
 
-3. Create and start all containers.
+4. Create and start all containers.
 
    ```console
    docker compose up -d
