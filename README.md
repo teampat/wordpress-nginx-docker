@@ -133,6 +133,8 @@ chmod +x backup.sh
 ```console
 0 1 * * * /your/directory/wordpress-nginx-docker/backup.sh
 ```
+4. After a successful backup finishes, All backup files are stored in `./backup`
+
 
 ## Credits
 
