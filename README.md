@@ -114,7 +114,7 @@ Once configured the containers can be brought up using Docker Compose
 3. Now let's open a browser and navigate to ‌http://localhost or https://yourdomain The WordPress installation page will welcome you.
 
 ## Deploy with your old WordPress website 
-1. Copy your wordpress directory to `./wordpress` before start Docker Compose.
+1. Copy your wordpress files into `./wordpress` before start Docker Compose.
 2. Copy env from template file (`.env.develop` or `.env.production`) to `.env`
 
    ```console
