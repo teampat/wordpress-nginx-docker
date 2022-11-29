@@ -81,7 +81,7 @@ Change nginx server block config file to `localhost-auth.conf` or `production-au
 ## For Production
 1. Copy all your ssl certificate files to `config/nginx/ssl`
 
-2. Please change your server_name and ssl config on `config/nginx/production.conf`
+2. Please change your server_name and ssl config in `config/nginx/production.conf`
 ```conf
     server_name yourdomain.com www.yourdomain.com;
 
@@ -115,6 +115,24 @@ Once configured the containers can be brought up using Docker Compose
    ```console
    docker compose up -d
    ```
+
+## Backup Script
+1. Edit variable in `backup.sh`.
+```ini
+# Max of backups to keep
+max_days=3
+
+# file name prefix
+prefix="backup"
+```
+2. Make it executable.
+```console
+chmod +x backup.sh
+```
+3. Insert new cronjob config.
+```console
+0 1 * * * /your/directory/wordpress-nginx-docker/backup.sh
+```
 
 ## Credits
 
