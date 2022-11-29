@@ -1,0 +1,93 @@
+version: '3'
+services:
+  database:
+    image: mariadb:10.9
+    container_name: wp-database
+    restart: unless-stopped
+    networks:
+      - wordpress
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ${MYSQL_LOCAL_PATH}:/var/lib/mysql
+      - ${MYSQL_CONFIG}:/etc/mysql/conf.d/mysqld.cnf
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'
+        max-file: '3'
+
+  wordpress:
+    image: wordpress:php8.1-fpm
+    container_name: wp-wordpress
+    restart: unless-stopped
+    networks:
+      - wordpress
+    depends_on:
+      - database
+    volumes:
+      - ${WORDPRESS_LOCAL_PATH}:/var/www/html
+      - ${PHP_CONFIG}:/usr/local/etc/php/conf.d/custom.ini
+      - ${PHP_FPM_CONFIG}:/usr/local/etc/php-fpm.d/zz-docker.conf
+    environment:
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'
+        max-file: '3'
+
+  nginx:
+    build:
+      context: ./config/nginx/build
+      args:
+        BASIC_AUTH_USER: ${BASIC_AUTH_USER}
+        BASIC_AUTH_PASSWD: ${BASIC_AUTH_PASSWD}
+    container_name: wp-nginx
+    restart: unless-stopped
+    networks:
+      - wordpress
+    depends_on:
+      - wordpress
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ${WORDPRESS_LOCAL_PATH}:/var/www/html
+      - ${NGINX_CONF}:/etc/nginx/nginx.conf
+      - ${NGINX_SERVER_BLOCK_CONF}:/etc/nginx/conf.d/default.conf
+      - ${NGINX_CONFIGS_PATH}/:/etc/nginx/conf/
+      - ${NGINX_SSL_CERTS}:/etc/ssl:ro
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'
+        max-file: '3'
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wp-phpmyadmin
+    restart: unless-stopped
+    networks:
+      - wordpress
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'
+        max-file: '3'
+
+networks:
+  wordpress:
+    name: wp-network
+    driver: bridge
