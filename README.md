@@ -69,19 +69,22 @@ BASIC_AUTH_PASSWD=admin
 ```
 *For best security practices, it is always recommended that you change the default passwords.
 ## Enable basic authentication
-edit variable to enable basic authentication for wp-login.php & phpmyadmin 
+Edit environment variable to setup user/password and enable basic authentication for wp-login.php & phpmyadmin 
 
 
 
 ```ini
+   BASIC_AUTH_USER=admin
+   BASIC_AUTH_PASSWD=admin
+
    NGINX_SERVER_BLOCK_CONF=./config/nginx/localhost-auth.conf
 ```
 Change nginx server block config file to `localhost-auth.conf` or `production-auth.conf`
 
 ## For Production
-1. Copy all your ssl certificate files to `config/nginx/ssl`
+1. Copy all your ssl certificate files to `./config/nginx/ssl`
 
-2. Please change your server_name and ssl config in `config/nginx/production.conf`
+2. Please change your server_name and ssl config in `./config/nginx/production.conf`
 ```conf
     server_name yourdomain.com www.yourdomain.com;
 
@@ -115,6 +118,9 @@ Once configured the containers can be brought up using Docker Compose
    ```console
    docker compose up -d
    ```
+4. Now let's open a browser and navigate to ‌http://localhost or https://yourdomain The WordPress installation page will welcome you.
+## How can I access and log into phpMyAdmin?
+Browsing to http://localhost/phpmyadmin or https://yourdomain/phpmyadmin
 
 ## Backup Script
 1. Edit variable in `backup.sh`.
@@ -133,7 +139,7 @@ chmod +x backup.sh
 ```console
 0 1 * * * /your/directory/wordpress-nginx-docker/backup.sh
 ```
-4. After a successful backup finishes, All backup files are stored in `./backup`
+4. After a successful backup finishes, All backup files are stored in `./backup/web` and `./backup/mysql`
 
 
 ## Credits
