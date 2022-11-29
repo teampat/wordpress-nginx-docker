@@ -96,7 +96,7 @@ Change nginx server block config file to `localhost-auth.conf` or `production-au
    NGINX_SERVER_BLOCK_CONF=./config/nginx/production.conf
 ```
 
-## Deploy with New WordPress installation page
+## Deploy with new WordPress installation page
 
 Once configured the containers can be brought up using Docker Compose
 
