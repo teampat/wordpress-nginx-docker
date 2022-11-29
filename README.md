@@ -69,8 +69,7 @@ BASIC_AUTH_PASSWD=admin
 ```
 *For best security practices, it is always recommended that you change the default passwords.
 ## Enable basic authentication
-Edit environment variable to setup user/password and enable basic authentication for wp-login.php & phpmyadmin 
-
+Edit environment variable to setup user/password and enable basic authentication for protected wp-login.php & phpmyadmin
 
 
 ```ini
@@ -97,7 +96,7 @@ Change nginx server block config file to `localhost-auth.conf` or `production-au
    NGINX_SERVER_BLOCK_CONF=./config/nginx/production.conf
 ```
 
-## Deployment
+## Deploy with New WordPress installation page
 
 Once configured the containers can be brought up using Docker Compose
 
@@ -107,18 +106,34 @@ Once configured the containers can be brought up using Docker Compose
    cp .env.develop .env
    ```
 
-2. Build docker services
+2. Create and start all containers.
 
    ```console
-   docker compose build
+   docker compose up -d --build
+   ```
+3. Now let's open a browser and navigate to ‌http://localhost or https://yourdomain The WordPress installation page will welcome you.
+
+## Deploy with your old WordPress website 
+1. Copy your wordpress directory to `./wordpress` before start Docker Compose.
+2. Copy env from template file (`.env.develop` or `.env.production`) to `.env`
+
+   ```console
+   cp .env.develop .env
    ```
 
-3. Create and start all containers
+3. Create and start all containers.
 
    ```console
    docker compose up -d
    ```
-4. Now let's open a browser and navigate to ‌http://localhost or https://yourdomain The WordPress installation page will welcome you.
+4. Import sql file into database via command line. 
+   ```console
+   docker exec -i wp-database mysql -u'change_me_user' -p'change_me_passwd' change_me_database_name < backup.sql
+   ```
+
+   or \
+   You can import sql file into database via phpMyAdmin.
+
 ## How can I access and log into phpMyAdmin?
 Browsing to http://localhost/phpmyadmin or https://yourdomain/phpmyadmin
 
