@@ -68,17 +68,6 @@ BASIC_AUTH_PASSWD=admin
 
 ```
 *For best security practices, it is always recommended that you change the default passwords.
-## Enable basic authentication
-Edit environment variable to setup user/password and enable basic authentication for protected wp-login.php & phpmyadmin
-
-
-```ini
-   BASIC_AUTH_USER=admin
-   BASIC_AUTH_PASSWD=admin
-
-   NGINX_SERVER_BLOCK_CONF=./config/nginx/localhost-auth.conf
-```
-Change nginx server block config file to `localhost-auth.conf` or `production-auth.conf`
 
 ## For Production
 1. Copy all your ssl certificate files to `./config/nginx/ssl`
@@ -94,6 +83,25 @@ Change nginx server block config file to `localhost-auth.conf` or `production-au
 3. Change nginx server block config file to `production.conf` or `production-auth.conf`
 ```ini
    NGINX_SERVER_BLOCK_CONF=./config/nginx/production.conf
+```
+## Enable basic authentication
+Edit environment variable to setup user/password and enable basic authentication for protected wp-login.php & phpmyadmin
+
+
+```ini
+   BASIC_AUTH_USER=admin
+   BASIC_AUTH_PASSWD=admin
+
+   NGINX_SERVER_BLOCK_CONF=./config/nginx/localhost-auth.conf
+```
+Change nginx server block config file to `localhost-auth.conf` or `production-auth.conf`
+
+## Enable nginx cache
+Input keys_zone to enable cache in a nginx server block config file
+
+```ini
+   # Default: fastcgi_cache off;
+   fastcgi_cache FASTCGI_CACHE;
 ```
 
 ## Deploy with new WordPress installation page
