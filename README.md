@@ -84,7 +84,7 @@ BASIC_AUTH_PASSWD=admin
 ```ini
    NGINX_SERVER_BLOCK_CONF=./config/nginx/production.conf
 ```
-## Enable basic authentication
+## (Optional) Enable basic authentication
 Edit environment variable to setup user/password and enable basic authentication for protected wp-login.php & phpmyadmin
 
 
@@ -96,7 +96,7 @@ Edit environment variable to setup user/password and enable basic authentication
 ```
 Change nginx server block config file to `localhost-auth.conf` or `production-auth.conf`
 
-## Enable nginx cache
+## (Optional) Enable nginx cache
 Input keys_zone to enable cache in a nginx server block config file
 
 ```ini
