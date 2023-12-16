@@ -81,7 +81,7 @@ For production
 cp .env.production .env
 ```
 
-## For Production
+## For Production with ssl certificate
 1. Copy all your ssl certificate files to `./config/nginx/ssl`
 
 2. Please change your server_name and ssl config in `./config/nginx/production.conf`
