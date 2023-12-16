@@ -161,6 +161,17 @@ Once configured the containers can be brought up using Docker Compose
 ## How can I access to phpMyAdmin?
 Browsing to http://localhost/phpmyadmin or https://yourdomain/phpmyadmin
 
+## Refresh the ip list of CloudFlare
+The bash script may run manually or can be scheduled to refresh the ip list of CloudFlare automatically.
+1. Make it executable.
+```console
+chmod +x refresh_cloudflare_ip.sh
+```
+2. Generate the ip list of CloudFlare to `conf/cloudflare.conf`
+```console
+./refresh_cloudflare_ip.sh
+```
+
 ## Backup Script
 1. Edit variable in `backup.sh`.
 ```ini
@@ -182,5 +193,5 @@ chmod +x backup.sh
 
 
 ## Credits
-
-This repository is inspired by [mjstealey/wordpress-nginx-docker](https://github.com/mjstealey/wordpress-nginx-docker)
+- Bash script to refresh the ip list of CloudFlare [https://github.com/ergin/nginx-cloudflare-real-ip](https://github.com/ergin/nginx-cloudflare-real-ip)
+- This repository is inspired by [https://github.com/mjstealey/mjstealey/wordpress-nginx-docker](https://github.com/mjstealey/wordpress-nginx-docker)
