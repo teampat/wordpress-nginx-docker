@@ -158,7 +158,7 @@ Once configured the containers can be brought up using Docker Compose
    or \
    You can import sql file into database via phpMyAdmin.
 
-## How can I access and log into phpMyAdmin?
+## How can I access to phpMyAdmin?
 Browsing to http://localhost/phpmyadmin or https://yourdomain/phpmyadmin
 
 ## Backup Script
