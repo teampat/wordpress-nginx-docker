@@ -1,7 +1,7 @@
 version: '3'
 services:
   database:
-    image: mariadb:10.9
+    image: mariadb:11.2
     container_name: wp-database
     restart: unless-stopped
     networks:
@@ -21,7 +21,7 @@ services:
         max-file: '3'
 
   wordpress:
-    image: wordpress:php8.1-fpm
+    image: wordpress:php8.2-fpm
     container_name: wp-wordpress
     restart: unless-stopped
     networks:
