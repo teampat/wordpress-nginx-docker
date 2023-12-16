@@ -69,6 +69,18 @@ BASIC_AUTH_PASSWD=admin
 ```
 *For best security practices, it is always recommended that you change the default passwords.
 
+Before docker-compose up starts, Please copy .env.develop or .env.production to .env
+
+For localhost 
+```console
+cp .env.develop .env
+```
+
+For production
+```console
+cp .env.production .env
+```
+
 ## For Production
 1. Copy all your ssl certificate files to `./config/nginx/ssl`
 
