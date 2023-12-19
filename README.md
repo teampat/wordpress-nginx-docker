@@ -69,7 +69,7 @@ BASIC_AUTH_PASSWD=admin
 ```
 *For best security practices, it is always recommended that you change the default passwords.
 
-Before docker-compose up starts, Please copy .env.develop or .env.production to .env
+Before docker-compose up starts, Please copy `.env.develop` or `.env.production` to `.env`
 
 For localhost 
 ```console
@@ -139,7 +139,7 @@ Once configured the containers can be brought up using Docker Compose
    ```console
    chown -R www-data:www-data wordpress/
    ```
-3. Copy env from template file (`.env.develop` or `.env.production`) to `.env`
+3. copy `.env.develop` or `.env.production` to `.env`
 
    ```console
    cp .env.develop .env
