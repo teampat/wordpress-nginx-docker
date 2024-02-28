@@ -7,6 +7,6 @@ RUN apt-get update -y \
 
 ARG BASIC_AUTH_USER BASIC_AUTH_PASSWD
 
-RUN htpasswd -c -b /etc/nginx/auth.htpasswd $BASIC_AUTH_USER $BASIC_AUTH_USER
+RUN htpasswd -c -b /etc/nginx/auth.htpasswd $BASIC_AUTH_USER $BASIC_AUTH_PASSWD
 
 CMD ["nginx", "-g", "daemon off;"]
